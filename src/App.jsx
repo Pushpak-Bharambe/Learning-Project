@@ -2,7 +2,7 @@ import "./Style.css";
 import { Login } from "./Login";
 import { Signup } from "./Signup";
 import { useState } from "react";
-// import { Forget } from "./Forget.jsx";
+import { Forget } from "./Forget.jsx";
 import { Home } from "./Home.jsx";
 
 export function App() {
@@ -16,8 +16,8 @@ export function App() {
     case "SignUp":
       return <Signup Signupbtn={setActivePage} />;
 
-    // case "forget":
-    //   return <Forget Signupbtn={setActivePage} />;
+    case "forget":
+      return <Forget Signupbtn={setActivePage} />;
 
     case "home":
       return <Home Signupbtn={setActivePage} />;

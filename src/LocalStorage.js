@@ -29,18 +29,14 @@ export const authenticateUser = (newData) => {
   return false;
 };
 
-export const forgetPassword = (forgetData, setIsReset, setIsError, login) => {
+export const forgetPassword = (forgetData) => {
   const user = JSON.parse(localStorage.getItem("userDetails"))?.find(
     (el) => el.userName === forgetData.username
   );
 
   if (user) {
     user.password = forgetData.newPassword;
-    setIsReset(true);
-    setTimeout(() => {
-      login();
-    }, 5000);
-  } else {
-    setIsError(true);
+    return true;
   }
+  return false;
 };
