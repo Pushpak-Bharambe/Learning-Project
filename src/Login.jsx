@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { authenticateUser } from "./LocalStorage";
 import { useStatus } from "./managestatus";
 
+import { useNavigate } from "react-router-dom";
+
 const Input = styled.input`
   margin-top: 10px;
 `;
@@ -25,7 +27,7 @@ export const Login = ({ Signupbtn }) => {
   // const [userPassword, setUserPassword] = useState("");
 
   //   const [usersDetails, setUserDetails] = useState([]);
-
+  const navigate = useNavigate();
   //   const handleOnSubmit = (e) => {
   //     e.preventDefault();
 
@@ -35,20 +37,22 @@ export const Login = ({ Signupbtn }) => {
   //     ]);
   //   };
   const { isSuccess, isError, setStatus } = useStatus("idle");
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
     // console.log(usersDetails);
 
     const userCredentials = {
-      userName: e.target.userName.value,
+      userNameOrEmail: e.target.userName.value,
       userPassword: e.target.password.value,
     };
 
     if (authenticateUser(userCredentials)) {
       setStatus("Success");
       return setTimeout(() => {
-        Signupbtn("home");
+        // Signupbtn("home");
+        navigate("/home");
       }, 5000);
     } else {
       setStatus("Error");
@@ -73,7 +77,7 @@ export const Login = ({ Signupbtn }) => {
             type="text"
             name="userName"
             required
-            placeholder="Username"
+            placeholder="Username/UserEmail"
           ></StyledInput>
           <StyledInput
             // className=" loginuser"
@@ -87,11 +91,30 @@ export const Login = ({ Signupbtn }) => {
             Login
           </button>
           <div className="links">
-            <p className="link" onClick={signup}>
+            <p
+              className="link"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
               SignUp
             </p>
-            <p className="linkforget" onClick={forget}>
+            <p
+              className="linkforget"
+              onClick={() => {
+                navigate("/forget");
+              }}
+            >
               Forget Password
+            </p>
+
+            <p
+              className="linkforget"
+              onClick={() => {
+                navigate("/ForgetUserName");
+              }}
+            >
+              Forget UserName
             </p>
           </div>
           {isSuccess && (

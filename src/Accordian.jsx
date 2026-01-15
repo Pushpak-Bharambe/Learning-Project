@@ -28,7 +28,7 @@ const AccordianItem = ({ items, index, curOpen, setcurOpen }) => {
     <div className="items" onClick={handleOnClick}>
       <h1 className="number">{index < 9 ? `0${index + 1}` : index + 1}</h1>
       <h1 className="name">{items.firstName + items.lastName}</h1>
-
+      <p className="icon">{index === curOpen ? "-" : "+"}</p>
       {index === curOpen && (
         <div className="content">
           <p>UserName :{items.userName}</p>

@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useStatus } from "./managestatus";
 import { CalculateAge } from "./ageCalculator";
 import { addNewUser } from "./LocalStorage";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = ({ Signupbtn }) => {
+  const navigate = useNavigate();
   const { isSuccess, isError, setStatus } = useStatus("Idle");
   const [dob, setDob] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
 
   // const [firstName, setFirstName] = useState("");
 
@@ -23,9 +26,9 @@ export const Signup = ({ Signupbtn }) => {
 
   // const [error, setError] = useState(false);
 
-  const login = () => {
-    Signupbtn("login");
-  };
+  // const login = () => {
+  //   Signupbtn("login");
+  // };
 
   // const [usersDetails, setUserDetails] = useState([]);
 
@@ -44,38 +47,23 @@ export const Signup = ({ Signupbtn }) => {
       password: e.target.password.value,
       userDate: e.target.userDate.value,
       mobilenum: e.target.mobilenum.value,
+      confirmPassword: e.target.confirmpassword.value,
       dob,
     };
-
-    setStatus(addNewUser(newData) ? "Success" : "Error");
+    setStatus(addNewUser(newData, setConfirmPass) ? "Success" : "Error");
   };
-
-  // let months = 0;
-
-  // if (birthyear === previousYear) {
-  //   months = 12 - birthyear;
-  //   months += new Date().getFullYear();
-  //   return ` Age: ${months} Month's`;
-  // }
-  //result % 12
-
-  // return ` Age: ${new Date().getFullYear - birthyear} year's`;
-
-  // if (year) {
-  //   month = new Date().getMonth() - new Date(dob).getMonth();
-  // }
-  // if (year > 0) {
-  //   return `${year}year`;
-  // } else if (month > 0) {
-  //   return `${month} month's`;
-  // }
 
   return (
     <>
       <div className="signup">
         <br></br>
         <form className="signupform" onSubmit={handleOnSubmit}>
-          <button className="btnlogin" onClick={login}>
+          <button
+            className="btnlogin"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
             LOGIN
           </button>
           <h1>SIGNUP</h1>
@@ -116,6 +104,15 @@ export const Signup = ({ Signupbtn }) => {
             placeholder="Enter Password"
             required
           ></input>
+
+          <input
+            className="signupuser"
+            type="password"
+            name="confirmpassword"
+            placeholder="Confirm Password"
+            required
+          ></input>
+
           <input
             className="signupuser"
             type="date"
@@ -137,12 +134,8 @@ export const Signup = ({ Signupbtn }) => {
           <button className="btn" type="submit">
             SignUp
           </button>
-          <p className="signuperror">
-            {isError ? "UserName Already exits" : ""}
-          </p>
-          <p className="signupsuccess">
-            {isSuccess ? "SignUp Successfully" : ""}
-          </p>
+          {isError && <p className="signuperror">{confirmPass}</p>}
+          {isSuccess && <p className="signupsuccess"> SignUp Successfully</p>}
         </form>
       </div>
     </>

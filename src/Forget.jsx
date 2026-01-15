@@ -1,12 +1,15 @@
 import { useStatus } from "./managestatus";
 import { forgetPassword } from "./LocalStorage";
+import { useNavigate } from "react-router-dom";
 
 export const Forget = ({ Signupbtn }) => {
   const { isSuccess, isError, setStatus } = useStatus("idle");
 
-  const login = () => {
-    Signupbtn("login");
-  };
+  const navigate = useNavigate();
+
+  // const login = () => {
+  //   Signupbtn("login");
+  // };
 
   const handleforgetOnsubmit = (e) => {
     e.preventDefault();
@@ -18,7 +21,7 @@ export const Forget = ({ Signupbtn }) => {
     if (forgetPassword(forgetData)) {
       setStatus("Success");
       setTimeout(() => {
-        login();
+        navigate("/login");
       }, 5000);
     } else {
       setStatus("Error");
@@ -50,7 +53,7 @@ export const Forget = ({ Signupbtn }) => {
         {isSuccess && (
           <>
             <p className="ifresetSuccess">password reset Successfully</p>
-            <p className="ifresetSuccess">"Redirecting to login page</p>
+            <p className="ifreset">"Redirecting to login page</p>
 
             <div className="spinner" />
           </>

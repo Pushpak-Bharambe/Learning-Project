@@ -11,9 +11,11 @@ body {
   flex-direction: column;
   justify-content: space-between;
   background-color: rgb(189, 198, 246);
+
   align-items: center;
   border-radius: 15px;
-  box-shadow: 0 0 30px rgb(72, 77, 121);
+  box-shadow: 0 0 30px rgb(40, 41, 48);
+  margin-top: 150px;
   /* .loginuser {
     margin-top: 10px;
     height: 30px;
@@ -109,9 +111,8 @@ body {
 
 .links {
   display: flex;
-  width: 300px;
+  width: 400px;
 
-  justify-content: space-evenly;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   .linkforget {
     color: red;
@@ -219,6 +220,7 @@ body {
   border-radius: 10px;
   color: black;
   gap: 24px;
+  cursor: pointer;
 }
 
 .items {
@@ -234,6 +236,17 @@ body {
     display: flex;
     /* align-content: center; */
     /* align-items: center; */
+    margin-top: 25px;
+
+    font-family: "Times New Roman", Times, serif;
+    color: grey;
+  }
+
+  .icon {
+    margin-left: 10px;
+    display: flex;
+    font-size: xx-large;
+    font-weight: 800;
     margin-top: 25px;
 
     font-family: "Times New Roman", Times, serif;
@@ -267,4 +280,54 @@ body {
 
 .successredirect {
   color: #041927;
+}
+
+.Forgetuserform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(189, 198, 246);
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgb(72, 77, 121);
+
+  .Forgetusername {
+    margin-top: 10px;
+    height: 30px;
+    width: 200px;
+  }
+  .btn {
+    /* color: blue; */
+    margin-bottom: 20px;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: large;
+    background-color: rgb(46, 46, 77);
+    color: whitesmoke;
+    margin-top: 20px;
+  }
+  h1 {
+    font-family: cursive;
+    color: rgb(2, 78, 70);
+  }
+}
+
+.forget {
+  height: 400px;
+  width: 400px;
+  /* background-color: blue; */
+  /* display: flex; */
+  text-align: center;
+  margin-top: 100px;
+}
+
+.forgetSucces {
+  color: rgb(5, 111, 42);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.forgeterror {
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
 }
