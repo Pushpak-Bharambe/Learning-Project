@@ -59,14 +59,6 @@ export const Login = ({ Signupbtn }) => {
     }
   };
 
-  const signup = () => {
-    Signupbtn("SignUp");
-  };
-
-  const forget = () => {
-    Signupbtn("forget");
-  };
-
   return (
     <>
       <Container>

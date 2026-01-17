@@ -50,6 +50,7 @@ export const Signup = ({ Signupbtn }) => {
       confirmPassword: e.target.confirmpassword.value,
       dob,
     };
+
     setStatus(addNewUser(newData, setConfirmPass) ? "Success" : "Error");
   };
 

@@ -1,6 +1,14 @@
+* {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
 body {
   /* background-color: rgb(144, 158, 238); */
-  background-color: rgb(189, 198, 246);
+  /* background-color: rgb(189, 198, 246); */
+  background-image: linear-gradient(to right, #4c3217, #cdfbea);
 
   display: flex;
   justify-content: center;
@@ -10,7 +18,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgb(189, 198, 246);
+  /* background-color: rgb(189, 198, 246); */
+  background-color: #bdb1a4;
 
   align-items: center;
   border-radius: 15px;

@@ -37,6 +37,7 @@ export const Forget = ({ Signupbtn }) => {
           className="forgetuser"
           placeholder="userName"
           type="text"
+          required
         ></input>
 
         <input
@@ -44,6 +45,7 @@ export const Forget = ({ Signupbtn }) => {
           placeholder="password"
           className="forgetuser"
           name="password"
+          required
         ></input>
 
         <button className="btn" type="submit">
