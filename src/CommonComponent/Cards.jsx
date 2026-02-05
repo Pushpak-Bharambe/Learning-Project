@@ -17,17 +17,16 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
   color: #6f6fec;
   background-color: #ffffff;
-  box-shadow: 0 0 20px black;
+  box-shadow: 0 0 10px black;
   text-align: center;
 `;
 
-export const Card = ({ icon, title }) => {
+export const Card = ({ icon, title, onClick }) => {
   return (
     <>
-      <Box className="employeediv">
+      <Box onClick={onClick}>
         <StyledIcon> {icon}</StyledIcon>
         <h1>{title}</h1>
       </Box>

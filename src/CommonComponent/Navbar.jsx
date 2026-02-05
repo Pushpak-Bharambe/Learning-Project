@@ -4,14 +4,15 @@ import Icon from "@mui/material/Icon";
 
 const NavbarDiv = styled.nav`
   height: 4rem;
-  width: 100rem;
-  background-color: #ece5e5;
+  width: 100%;
+  /* background-color: #ece5e5; */
+  /* background-color: #3e3ee86a; */
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 2rem;
-  box-shadow: 0 0 10px black;
-  padding-right: 4rem;
+  box-shadow: 0 0 5px black;
+  /* padding-right: 8rem; */
   top: 0;
   position: sticky;
 `;

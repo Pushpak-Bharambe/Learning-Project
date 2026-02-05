@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { Login } from "../Login";
-import { Signup } from "../Signup";
-import { Forget } from "../Forget";
-import { Home } from "../Home";
-import { ForgetUserName } from "../ForegetUsername";
-import { PageNotFound } from "../PageNotFound";
-import { EmployeeDashboard } from "../Empolyee/employeeDash";
-import { Navbar } from "../Empolyee/Navbar";
+import { Login } from "../Pages/Login";
+import { Signup } from "../Pages/Signup";
+import { Forget } from "../Pages/ForgetPassword";
+import { Home } from "../Pages/Home";
+import { ForgetUserName } from "../Pages/ForegetUsername";
+import { PageNotFound } from "../Pages/PageNotFound";
+import { EmployeeDashboard } from "../Pages/Employee/employeeDash";
+import { Navbar } from "../CommonComponent/Navbar";
+import { AddEmployee } from "../Pages/Employee/AddEmployee";
+import { ManageEmployee } from "../Pages/Employee/ManageEmployee";
 
 export const Layout = () => {
   return (
@@ -23,6 +25,9 @@ export const Layout = () => {
             <Route path="home" element={<Home />} />
             <Route path="forgetusername" element={<ForgetUserName />} />
             <Route path="employeedashboard" element={<EmployeeDashboard />} />
+            <Route path="AddEmployee" element={<AddEmployee />} />
+            <Route path="ManageEmployee" element={<ManageEmployee />} />
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

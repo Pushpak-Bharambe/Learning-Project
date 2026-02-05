@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import { Navbar } from "./Navbar";
-import { Card } from "./Cards";
+
+import { Card } from "../../CommonComponent/Cards";
+
+import { useNavigate } from "react-router-dom";
 
 const MainDiv = styled.div`
   background-color: white;
+
   width: 100rem;
   height: 100rem;
 `;
@@ -23,28 +26,51 @@ const Information = styled.div`
   background-repeat: no-repeat;
 `;
 
+const EmployeeDiv = styled.div`
+  height: 25rem;
+  width: 80rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10rem;
+  gap: 40px;
+  margin-top: 1rem;
+  background-color: white;
+`;
+
 const Container = styled.main`
   background-color: white;
   height: 60rem;
   width: 80rem;
   margin-top: 1rem;
-  color: #dd1818;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   padding-right: 5rem;
-  padding-left: 5rem;
+  padding-left: 3rem;
   margin-left: 12.5rem;
 `;
 
 export const EmployeeDashboard = () => {
+  const navigate = useNavigate();
   return (
     <MainDiv>
       <Information>
         <h1>This is Employee Page</h1>
       </Information>
-
+      <EmployeeDiv>
+        <Card
+          icon={"person_add"}
+          title={"Add Employees"}
+          onClick={() => navigate("/AddEmployee")}
+        />
+        <Card
+          icon={"manage_accounts"}
+          title={"Manage Employees"}
+          onClick={() => navigate("/ManageEmployee")}
+        />
+      </EmployeeDiv>
       <Container className="dashmain">
         <Card icon={"insert_drive_file"} title={"Payslips / documents"} />
         <Card icon={"account_balance_wallet "} title={"Expense Hub"} />

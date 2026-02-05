@@ -6,7 +6,8 @@ export const addNewUser = (newData, setConfirmPass) => {
     if (
       userDetails?.some(
         (el) =>
-          el.userName === newData.userName || el.userEmail === newData.userEmail
+          el.userName === newData.userName ||
+          el.userEmail === newData.userEmail,
       )
     ) {
       setConfirmPass(" UserName/UserEmail Already exits");
@@ -20,12 +21,12 @@ export const addNewUser = (newData, setConfirmPass) => {
 
 export const authenticateUser = (userCredentials) => {
   const AuthenticateUser = JSON.parse(
-    localStorage.getItem("userDetails")
+    localStorage.getItem("userDetails"),
   )?.find(
     (el) =>
       (el.userName === userCredentials.userNameOrEmail ||
         el.userEmail === userCredentials.userNameOrEmail) &&
-      el.password === userCredentials.userPassword
+      el.password === userCredentials.userPassword,
   );
 
   if (AuthenticateUser) {
@@ -37,7 +38,7 @@ export const authenticateUser = (userCredentials) => {
 
 export const forgetPassword = (forgetData) => {
   const user = JSON.parse(localStorage.getItem("userDetails"))?.find(
-    (el) => el.userName === forgetData.username
+    (el) => el.userName === forgetData.username,
   );
 
   if (user) {
@@ -53,4 +54,29 @@ export const ForgetUsername = (userEmail) => {
   });
 
   return users?.userName;
+};
+
+export const AddNewEmployee = (EmployeeData) => {
+  const EmpDetails = JSON.parse(localStorage.getItem("EmpDetails")) || [];
+  EmpDetails.push(EmployeeData);
+  localStorage.setItem("EmpDetails", JSON.stringify(EmpDetails));
+};
+
+export const HandleSave = (editEmployee) => {
+  const empData = JSON.parse(localStorage.getItem("EmpDetails"));
+
+  const updatedEmpData = empData.map((emp) =>
+    emp.EmployeeCode === editEmployee.EmployeeCode ? editEmployee : emp,
+  );
+  localStorage.setItem("EmpDetails", JSON.stringify(updatedEmpData));
+};
+
+export const handleDelete = (selectEmployee) => {
+  const empData = JSON.parse(localStorage.getItem("EmpDetails"));
+
+  const DeletedData = empData.filter((emp) => {
+    return emp.EmployeeCode !== selectEmployee.EmployeeCode;
+  });
+
+  localStorage.setItem("EmpDetails", JSON.stringify(DeletedData));
 };

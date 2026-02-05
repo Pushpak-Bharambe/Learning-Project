@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalculateAge } from "./ageCalculator";
+import { CalculateAge } from "../Services/ageCalculator";
 
 export const Accordian = ({ data }) => {
   const [curOpen, SetIsOpen] = useState(-1);

@@ -1,43 +1,101 @@
 import { useState } from "react";
-import { useStatus } from "./managestatus";
-import { CalculateAge } from "./ageCalculator";
-import { addNewUser } from "./LocalStorage";
+import { useStatus } from "../Services/managestatus";
+import { CalculateAge } from "../Services/ageCalculator";
+import { addNewUser } from "../Services/LocalStorage";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const MainDiv = styled.div`
+  height: 650px;
+  width: 1000px;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 260px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 30px black;
+`;
+const SignUpForm = styled.form`
+  display: flex;
+  height: 650px;
+  width: 500px;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  margin-left: 300px;
+
+  .signupuser {
+    margin-top: 10px;
+    height: 30px;
+    width: 200px;
+    border: none;
+    border-bottom: 2px solid #1e1e36;
+    outline: none;
+    font-size: small;
+    font-weight: bold;
+  }
+
+  .signupuser:hover {
+    border-bottom: 3px solid #5858d0;
+  }
+  .signupuser:hover::placeholder {
+    color: #5858d0;
+    font-size: 13.5px;
+  }
+  .btnSignup {
+    margin-bottom: 20px;
+    height: 30px;
+    width: 200px;
+    font-size: large;
+    color: whitesmoke;
+    background-color: #5858d0;
+    border: none;
+  }
+  h1 {
+    font-family: cursive;
+    color: rgb(2, 78, 70);
+  }
+  .btnlogin {
+    margin-top: 20px;
+    margin-left: 300px;
+    height: 30px;
+    width: 70px;
+    font-size: large;
+    background-color: #5858d0;
+    color: whitesmoke;
+    border: none;
+    outline: none;
+  }
+`;
+
+const SignUpSuccess = styled.p`
+  color: green;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+const SignUpError = styled.p`
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+const ImgDiv = styled.div`
+  height: 650px;
+  width: 200px;
+`;
+
+const Img = styled.img`
+  height: 650px;
+  width: 500px;
+`;
 
 export const Signup = ({ Signupbtn }) => {
   const navigate = useNavigate();
   const { isSuccess, isError, setStatus } = useStatus("Idle");
   const [dob, setDob] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-
-  // const [firstName, setFirstName] = useState("");
-
-  // const [lastName, setLastName] = useState("");
-
-  // const [userName, setUserName] = useState("");
-
-  // const [password, setPassword] = useState("");
-
-  // const [mobilenum, setMobileNum] = useState("");
-
-  // const [status, setStatus] = useState(false);
-
-  // const [success, setSuccess] = useState(false);
-
-  // const [error, setError] = useState(false);
-
-  // const login = () => {
-  //   Signupbtn("login");
-  // };
-
-  // const [usersDetails, setUserDetails] = useState([]);
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    // console.log(usersDetails);
-    // console.log(e);
-
-    // e.target.firstname.value;
 
     const newData = {
       firstName: e.target.firstname.value,
@@ -56,9 +114,11 @@ export const Signup = ({ Signupbtn }) => {
 
   return (
     <>
-      <div className="signup">
-        <br></br>
-        <form className="signupform" onSubmit={handleOnSubmit}>
+      <MainDiv>
+        <ImgDiv>
+          <Img src="/employeeimage.jpg" alt="img"></Img>
+        </ImgDiv>
+        <SignUpForm onSubmit={handleOnSubmit}>
           <button
             className="btnlogin"
             onClick={() => {
@@ -68,11 +128,13 @@ export const Signup = ({ Signupbtn }) => {
             LOGIN
           </button>
           <h1>SIGNUP</h1>
+
           <input
             className="signupuser"
             type="text"
             name="firstname"
             required
+            disabled={false}
             placeholder="Enter User FirstName"
           ></input>
           <input
@@ -132,13 +194,13 @@ export const Signup = ({ Signupbtn }) => {
           ></input>
           <br></br>
 
-          <button className="btn" type="submit">
+          <button className="btnSignup" type="submit">
             SignUp
           </button>
-          {isError && <p className="signuperror">{confirmPass}</p>}
-          {isSuccess && <p className="signupsuccess"> SignUp Successfully</p>}
-        </form>
-      </div>
+          {isError && <SignUpError>{confirmPass}</SignUpError>}
+          {isSuccess && <SignUpSuccess> SignUp Successfully</SignUpSuccess>}
+        </SignUpForm>
+      </MainDiv>
     </>
   );
 };

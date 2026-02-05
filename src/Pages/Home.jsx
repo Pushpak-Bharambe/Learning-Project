@@ -1,4 +1,4 @@
-import { Accordian } from "./Accordian";
+import { Accordian } from "../CommonComponent/Accordian";
 import { useNavigate } from "react-router-dom";
 
 export const Home = ({ usersDetails, Signupbtn }) => {
