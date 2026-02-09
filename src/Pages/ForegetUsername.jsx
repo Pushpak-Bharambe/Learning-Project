@@ -85,10 +85,6 @@ export const ForgetUserName = () => {
   const HandleOnSubmitUserName = (e) => {
     e.preventDefault();
 
-    // const ForegtUserData = {
-    //   userEmail: e.target.userEmail.value,
-    // };
-
     const result = ForgetUsername(e.target.userEmail.value);
     setUserName(result);
   };

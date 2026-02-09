@@ -63,6 +63,12 @@ const LoginForm = styled.form`
     background-color: #5858d0;
     border: none;
   }
+
+  .btn:active {
+    background: #5151db;
+    transform: scale(0.95);
+  }
+
   h1 {
     font-family: cursive;
     color: rgb(2, 78, 70);
@@ -91,9 +97,7 @@ const LoginForm = styled.form`
 
     justify-content: space-evenly;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    /* .link {
-    
-  } */
+
     .linkforget {
       color: red;
     }
@@ -138,8 +142,6 @@ export const Login = ({ Signupbtn }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(usersDetails);
-
     const userCredentials = {
       userNameOrEmail: e.target.userName.value,
       userPassword: e.target.password.value,
@@ -148,7 +150,6 @@ export const Login = ({ Signupbtn }) => {
     if (authenticateUser(userCredentials)) {
       setStatus("Success");
       return setTimeout(() => {
-        // Signupbtn("home");
         navigate("/home");
       }, 5000);
     } else {

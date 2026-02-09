@@ -52,6 +52,12 @@ const SignUpForm = styled.form`
     background-color: #5858d0;
     border: none;
   }
+
+  .btnSignup:active {
+    background: #5151db;
+    transform: scale(0.95);
+  }
+
   h1 {
     font-family: cursive;
     color: rgb(2, 78, 70);
@@ -66,6 +72,11 @@ const SignUpForm = styled.form`
     color: whitesmoke;
     border: none;
     outline: none;
+  }
+
+  .btnlogin:active {
+    background: #5151db;
+    transform: scale(0.95);
   }
 `;
 

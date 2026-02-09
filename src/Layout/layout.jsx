@@ -10,7 +10,7 @@ import { EmployeeDashboard } from "../Pages/Employee/employeeDash";
 import { Navbar } from "../CommonComponent/Navbar";
 import { AddEmployee } from "../Pages/Employee/AddEmployee";
 import { ManageEmployee } from "../Pages/Employee/ManageEmployee";
-
+import ProtectedRoute from "./ProtectedRoute";
 export const Layout = () => {
   return (
     <>
@@ -22,7 +22,16 @@ export const Layout = () => {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="forget" element={<Forget />} />
-            <Route path="home" element={<Home />} />
+
+            <Route
+              path="home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="forgetusername" element={<ForgetUserName />} />
             <Route path="employeedashboard" element={<EmployeeDashboard />} />
             <Route path="AddEmployee" element={<AddEmployee />} />

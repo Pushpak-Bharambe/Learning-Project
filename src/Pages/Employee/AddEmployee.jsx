@@ -31,6 +31,11 @@ const Button = styled.button`
   background-color: #5858d0;
   border: none;
   outline: none;
+
+  && .btnadd:active {
+    background: #5151db;
+    transform: scale(0.95);
+  }
 `;
 
 const Label = styled.label`
@@ -62,7 +67,6 @@ const InputDiv2 = styled.div`
 
 const LastDiv = styled.div`
   height: 6rem;
-
   display: flex;
   flex-direction: column;
   padding-left: 3rem;
@@ -83,9 +87,7 @@ const Form = styled.form`
   flex-direction: column;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  /* box-shadow: 0 0 20px black; */
   width: 43rem;
-  /* border-radius: 5px; */
 
   h1 {
     font-family: cursive;
@@ -103,6 +105,11 @@ const Form = styled.form`
 
   .addemployeeinput:hover {
     border-bottom: 3px solid #5858d0;
+  }
+
+  .btnadd:active {
+    background: #5151db;
+    transform: scale(0.95);
   }
 `;
 
@@ -135,8 +142,6 @@ const ImgDiv = styled.div`
 `;
 
 export const AddEmployee = ({ AddEmpdata }) => {
-  // const [employee, setEmployee] = useState("");
-
   const HandleOnAdd = (e) => {
     e.preventDefault();
 
@@ -152,6 +157,7 @@ export const AddEmployee = ({ AddEmpdata }) => {
       EmployeeStatus: e.target.EmployeeStatus.value,
       empPosition: e.target.empPosition.value,
       empEmail: e.target.empEmail.value,
+      empImg: e.target.empImg.value,
     };
 
     AddNewEmployee(EmployeeData);
@@ -292,7 +298,9 @@ export const AddEmployee = ({ AddEmpdata }) => {
               className=" addemployeeinput"
             ></input>
           </LastDiv>
-          <Button type="submit">Add Employee</Button>
+          <Button type="submit" className="btnadd">
+            Add Employee
+          </Button>
         </Form>
       </MainDiv>
     </>

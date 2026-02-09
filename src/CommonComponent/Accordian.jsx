@@ -18,9 +18,7 @@ export const Accordian = ({ data }) => {
 };
 
 const AccordianItem = ({ items, index, curOpen, setcurOpen }) => {
-  //   const isOpen = index === curOpen;
   function handleOnClick() {
-    // setcurOpen(isOpen ? null : index);
     setcurOpen((prev) => (prev === index ? -1 : index));
   }
 

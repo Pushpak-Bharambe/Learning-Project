@@ -31,6 +31,7 @@ export const authenticateUser = (userCredentials) => {
 
   if (AuthenticateUser) {
     sessionStorage.setItem("loggedInUser", JSON.stringify(AuthenticateUser));
+
     return true;
   }
   return false;
