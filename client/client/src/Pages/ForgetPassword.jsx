@@ -3,7 +3,6 @@ import { forgetPassword } from "../Services/LocalStorage";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { LockKeyhole, User, ArrowLeft, ShieldCheck } from "lucide-react";
-import API from "../CommonComponent/TokenRequest";
 
 const fadeUp = keyframes`
   from{
@@ -252,25 +251,23 @@ export const Forget = () => {
 
   const navigate = useNavigate();
 
-  const handleforgetOnsubmit = async (e) => {
+  const handleforgetOnsubmit = (e) => {
     e.preventDefault();
 
     const forgetData = {
       username: e.target.username.value,
-      password: e.target.password.value,
+      newPassword: e.target.password.value,
     };
 
-    await API.post("/auth/forgetpassword", forgetData);
+    if (forgetPassword(forgetData)) {
+      setStatus("Success");
 
-    // if (forgetPassword(forgetData)) {
-    //   setStatus("Success");
-
-    //   setTimeout(() => {
-    //     navigate("/login");
-    //   }, 4000);
-    // } else {
-    //   setStatus("Error");
-    // }
+      setTimeout(() => {
+        navigate("/login");
+      }, 4000);
+    } else {
+      setStatus("Error");
+    }
   };
 
   return (

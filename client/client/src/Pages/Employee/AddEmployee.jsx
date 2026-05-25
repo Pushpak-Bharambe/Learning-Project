@@ -137,8 +137,9 @@ export const AddEmployee = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       const res = await API.get("/roles");
-
+      // const managers = await API.get("/managers");
       setRolesData(res.data);
+      // setManagersData(managers.data);
     };
     fetchRoles();
   }, []);

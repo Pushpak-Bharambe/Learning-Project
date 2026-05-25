@@ -24,4 +24,12 @@ public interface IUserServices {
 
 
    public  Users getUserByUsername(String username);
+
+    public Users forgetpassword(Users users);
+
+   public  String forgetUserName(String email);
+
+    public Users updateUser(Long id, Users users);
+
+    public void deleteUser(Long Id);
 }

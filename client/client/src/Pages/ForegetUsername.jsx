@@ -3,7 +3,6 @@ import { ForgetUsername } from "../Services/LocalStorage";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Mail, User, ArrowLeft, CheckCircle, XCircle } from "lucide-react";
-import API from "../CommonComponent/TokenRequest";
 
 const fadeUp = keyframes`
   from {
@@ -217,17 +216,11 @@ export const ForgetUserName = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const result = await API.get("/auth/forgetusername", {
-      params: {
-        email: e.target.email.value,
-      },
-    });
-
-    // const result = ForgetUsername(e.target.userEmail.value);
-    setUserName(result?.data);
+    const result = ForgetUsername(e.target.userEmail.value);
+    setUserName(result);
   };
 
   return (
@@ -265,7 +258,7 @@ export const ForgetUserName = () => {
 
               <Input
                 type="email"
-                name="email"
+                name="userEmail"
                 placeholder="Enter your email address"
                 required
               />

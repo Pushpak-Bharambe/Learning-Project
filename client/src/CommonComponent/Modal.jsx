@@ -9,13 +9,13 @@ import {
   cloneElement,
 } from "react";
 
-import { X } from "lucide-react";
+import { X, User, BadgeCheck } from "lucide-react";
 
 /* =========================
    ANIMATIONS
 ========================= */
 
-const fadeIn = keyframes`
+const overlayAnimation = keyframes`
   from {
     opacity: 0;
   }
@@ -25,10 +25,10 @@ const fadeIn = keyframes`
   }
 `;
 
-const popup = keyframes`
+const modalAnimation = keyframes`
   from {
     opacity: 0;
-    transform: translate(-50%, -45%) scale(0.95);
+    transform: translate(-50%, -47%) scale(0.96);
   }
 
   to {
@@ -45,22 +45,25 @@ const Overlay = styled.div`
   position: fixed;
   inset: 0;
 
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(15, 23, 42, 0.6);
 
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(7px);
 
   z-index: 999;
 
-  animation: ${fadeIn} 0.2s ease;
+  animation: ${overlayAnimation} 0.2s ease;
 `;
 
 const ModalBox = styled.div`
-  width: 28rem;
-  max-width: 90%;
+  width: 54rem;
 
-  background: white;
+  max-width: calc(100% - 2rem);
 
-  border-radius: 24px;
+  background: #f8fafc;
+
+  border-radius: 26px;
+
+  overflow: hidden;
 
   position: fixed;
 
@@ -71,97 +74,154 @@ const ModalBox = styled.div`
 
   z-index: 1000;
 
-  overflow: hidden;
+  animation: ${modalAnimation} 0.25s ease;
 
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
 
-  animation: ${popup} 0.25s ease;
+  @media (max-width: 768px) {
+    width: calc(100% - 1rem);
+
+    border-radius: 20px;
+  }
 `;
 
 const Header = styled.div`
-  height: 4.5rem;
+  height: 9rem;
 
-  padding: 0 1.5rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+
+  padding: 1.6rem 2rem;
+
+  position: relative;
 
   display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+
+  justify-content: space-between;
 `;
 
-const Title = styled.h2`
+const ProfileSection = styled.div`
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.2rem;
+`;
+
+const Avatar = styled.div`
+  height: 4.3rem;
+  width: 4.3rem;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: white;
+
+  border: 3px solid rgba(255, 255, 255, 0.2);
+`;
+
+const Info = styled.div`
+  display: flex;
+
+  flex-direction: column;
+`;
+
+const EmployeeName = styled.h2`
   margin: 0;
 
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: white;
 
-  color: #0f172a;
+  font-size: 1.5rem;
+
+  font-weight: 700;
+`;
+
+const EmployeeRole = styled.p`
+  margin-top: 0.25rem;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 0.92rem;
+`;
+
+const Status = styled.div`
+  margin-top: 0.7rem;
+
+  width: fit-content;
+
+  padding: 0.45rem 0.9rem;
+
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.45rem;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
 `;
 
 const CloseButton = styled.button`
-  height: 2.3rem;
-  width: 2.3rem;
+  height: 3rem;
+  width: 3rem;
 
   border: none;
 
-  border-radius: 12px;
+  border-radius: 16px;
 
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.15);
 
-  cursor: pointer;
+  color: white;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
+  cursor: pointer;
 
   transition: 0.2s;
 
   &:hover {
-    background: #e2e8f0;
+    background: rgba(255, 255, 255, 0.25);
+
     transform: rotate(90deg);
   }
 `;
 
 const Body = styled.div`
-  padding: 1.8rem;
+  padding: 2rem;
 
-  color: #475569;
+  max-height: 70vh;
 
-  font-size: 0.95rem;
+  overflow-y: auto;
 
-  line-height: 1.6;
-`;
+  background: #f8fafc;
 
-const Footer = styled.div`
-  padding: 1.2rem 1.8rem;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
 
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
 
-  border-top: 1px solid #f1f5f9;
-`;
-
-const Button = styled.button`
-  border: none;
-
-  padding: 0.8rem 1.4rem;
-
-  border-radius: 14px;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  background: ${(props) => (props.primary ? "#2563eb" : "#f1f5f9")};
-
-  color: ${(props) => (props.primary ? "white" : "#0f172a")};
-
-  &:hover {
-    transform: translateY(-2px);
+    border-radius: 20px;
   }
 `;
 
@@ -169,10 +229,10 @@ const Button = styled.button`
    CONTEXT
 ========================= */
 
-export const ModelContext = createContext();
+export const ModalContext = createContext();
 
 /* =========================
-   MODAL PROVIDER
+   PROVIDER
 ========================= */
 
 export const Modal = ({ children }) => {
@@ -183,9 +243,9 @@ export const Modal = ({ children }) => {
   const close = () => setOpenName("");
 
   return (
-    <ModelContext.Provider value={{ openName, open, close }}>
+    <ModalContext.Provider value={{ openName, open, close }}>
       {children}
-    </ModelContext.Provider>
+    </ModalContext.Provider>
   );
 };
 
@@ -193,11 +253,30 @@ export const Modal = ({ children }) => {
    OPEN
 ========================= */
 
-export const Open = ({ children, opens }) => {
-  const { open } = useContext(ModelContext);
+// export const Open = ({ children, opens }) => {
+//   const { open } = useContext(ModalContext);
 
+//   return cloneElement(children, {
+//     onClick: () => open(opens),
+//   });
+// };
+
+export const Open = ({
+  children,
+  opens,
+  setCanEdit,
+  setEditEmployee,
+  setSelectEmployee,
+  emp,
+}) => {
+  const { open } = useContext(ModalContext);
   return cloneElement(children, {
-    onClick: () => open(opens),
+    onClick: () => {
+      open(opens);
+      setSelectEmployee(emp);
+      setEditEmployee(emp);
+      setCanEdit(false);
+    },
   });
 };
 
@@ -206,7 +285,7 @@ export const Open = ({ children, opens }) => {
 ========================= */
 
 export const Close = ({ children }) => {
-  const { close } = useContext(ModelContext);
+  const { close } = useContext(ModalContext);
 
   return cloneElement(children, {
     onClick: close,
@@ -217,10 +296,16 @@ export const Close = ({ children }) => {
    WINDOW
 ========================= */
 
-export const Window = ({ children, name, title = "WorkSphere" }) => {
-  const modelRoot = document.getElementById("modal-root");
+export const Window = ({
+  children,
+  name,
+  employeeName = "Pushpak Bharambe",
+  employeeRole = "Frontend Developer",
+  employeeStatus = "ACTIVE",
+}) => {
+  const modalRoot = document.getElementById("modal-root");
 
-  const { openName, close } = useContext(ModelContext);
+  const { openName, close } = useContext(ModalContext);
 
   const ref = useRef(null);
 
@@ -238,6 +323,20 @@ export const Window = ({ children, name, title = "WorkSphere" }) => {
     };
   }, [close]);
 
+  useEffect(() => {
+    function handleEscape(e) {
+      if (e.key === "Escape") {
+        close();
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [close]);
+
   if (name !== openName) return null;
 
   return createPortal(
@@ -246,22 +345,32 @@ export const Window = ({ children, name, title = "WorkSphere" }) => {
 
       <ModalBox ref={ref}>
         <Header>
-          <Title>{title}</Title>
+          <ProfileSection>
+            <Avatar>
+              <User size={26} />
+            </Avatar>
+
+            <Info>
+              <EmployeeName>{employeeName}</EmployeeName>
+
+              <EmployeeRole>{employeeRole}</EmployeeRole>
+
+              <Status>
+                <BadgeCheck size={14} />
+
+                {employeeStatus}
+              </Status>
+            </Info>
+          </ProfileSection>
 
           <CloseButton onClick={close}>
-            <X size={18} />
+            <X size={20} />
           </CloseButton>
         </Header>
 
         <Body>{children}</Body>
-
-        <Footer>
-          <Button onClick={close}>Cancel</Button>
-
-          <Button primary>Save</Button>
-        </Footer>
       </ModalBox>
     </>,
-    modelRoot,
+    modalRoot,
   );
 };

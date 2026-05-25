@@ -75,5 +75,27 @@ public class UserController {
         return  userServices.getManagerEmployee(username);
     }
 
+    @PostMapping("/auth/forgetpassword")
+    public Users forgetpassword(@RequestBody Users users){
+        return userServices.forgetpassword(users);
+    }
+
+    @GetMapping("/auth/forgetusername")
+    public String fotgetUserName(String email){
+        return  userServices.forgetUserName(email);
+    }
+
+
+    @PutMapping("/users/{id}")
+    public Users updateUser(@PathVariable("id") Long Id , @RequestBody Users users){
+        return userServices.updateUser(Id , users);
+
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable("id") Long Id){
+         userServices.deleteUser(Id);
+    }
+
 
 }

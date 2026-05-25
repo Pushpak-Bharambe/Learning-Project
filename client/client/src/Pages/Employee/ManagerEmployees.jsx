@@ -25,6 +25,7 @@ const Caption = styled.caption`
 
   font-size: 1.9rem;
   font-weight: 800;
+  letter-spacing: 0.5px;
 
   color: #0f172a;
 
@@ -36,25 +37,42 @@ const Caption = styled.caption`
   background: linear-gradient(135deg, #ffffff, #f1f5f9, #e2e8f0);
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-`;
 
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.15),
+      transparent 60%
+    );
+    transform: rotate(25deg);
+  }
+`;
 /* ---------- TABLE ---------- */
 const Table = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px;
+  border-spacing: 0 10px; /* 👈 adds gap between rows */
 
   background: white;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 `;
-
-/* ---------- HEADER ---------- */
+/* ---------- HEADER ROW ---------- */
 const TRHead = styled.tr`
   background: #f8fafc;
 `;
 
+/* ---------- HEADER CELL ---------- */
 const TH = styled.th`
   padding: 14px;
   text-align: center;
@@ -83,52 +101,22 @@ const TR = styled.tr`
     transform: scale(1.002);
   }
 `;
-
 /* ---------- CELL ---------- */
 const TD = styled.td`
-  padding: 18px 14px;
+  padding: 18px 14px; /* 👈 increased row height */
   border-bottom: 1px solid #eef2f7;
 
   color: #334155;
   font-size: 0.92rem;
-`;
 
-/* ---------- NAME (IMPROVED UI STYLE) ---------- */
+  vertical-align: middle;
+`;
+/* ---------- NAME STYLE ---------- */
 const Name = styled.span`
-  font-weight: 800;
-  font-size: 1.05rem;
-
-  background: linear-gradient(90deg, #1e3a8a, #4f46e5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  letter-spacing: 0.3px;
-`;
-
-/* ---------- STATUS BADGE ---------- */
-const Status = styled.span`
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
   font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-
-  color: ${({ status }) =>
-    status?.toLowerCase() === "active" ? "#166534" : "#991b1b"};
-
-  background: ${({ status }) =>
-    status?.toLowerCase() === "active"
-      ? "rgba(34, 197, 94, 0.15)"
-      : "rgba(239, 68, 68, 0.15)"};
-
-  box-shadow: ${({ status }) =>
-    status?.toLowerCase() === "active"
-      ? "0 4px 12px rgba(34, 197, 94, 0.12)"
-      : "0 4px 12px rgba(239, 68, 68, 0.12)"};
+  font-size: 1.05rem;
+  color: #0f172a;
 `;
-
 export const ManagerEmployees = () => {
   const [selectEmployee, setSelectEmployee] = useState(null);
   const [editEmployee, setEditEmployee] = useState([]);
@@ -191,11 +179,7 @@ export const ManagerEmployees = () => {
                       <TD>{emp.email}</TD>
                       <TD>{emp.hiredate}</TD>
                       <TD>{emp.position}</TD>
-                      <TD>
-                        <Status status={emp.employeestatus}>
-                          {emp.employeestatus}
-                        </Status>
-                      </TD>
+                      <TD>{emp.employeestatus}</TD>
                     </TR>
                   </Open>
                 ))
@@ -216,7 +200,6 @@ export const ManagerEmployees = () => {
             setEditEmployee={setEditEmployee}
             setCanEdit={setCanEdit}
             setEmployeeList={setEmployeeList}
-            employeeList={employeeList}
           />
         </Window>
       </Modal>

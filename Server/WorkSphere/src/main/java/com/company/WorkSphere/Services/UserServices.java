@@ -9,6 +9,7 @@ import com.company.WorkSphere.Exception.UserNotFoundException;
 import com.company.WorkSphere.repository.RoleRepository;
 import com.company.WorkSphere.repository.UserRepository;
 
+import jakarta.persistence.Id;
 import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServices implements IUserServices {
@@ -120,5 +122,50 @@ public class UserServices implements IUserServices {
     public Users getUserByUsername(String username) {
         return userRepository.findByUsername(username);
 
+    }
+
+    @Override
+    public Users forgetpassword(Users users) {
+
+        String username = users.getUsername();
+
+        Users existingUser = userRepository.findByUsername(username);
+
+
+         existingUser.setPassword(users.getPassword());
+
+         return userRepository.save(existingUser);
+    }
+
+    @Override
+    public String forgetUserName(String email) {
+
+        Users existingUser = userRepository.findByemail(email);
+
+        return existingUser.getUsername();
+    }
+
+    @Override
+    public Users updateUser(Long Id, Users users) {
+
+        Users existingUser = userRepository.findById(Id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        existingUser.setFirstname(users.getFirstname());
+        existingUser.setLastname(users.getLastname());
+        existingUser.setDepartment(users.getDepartment());
+        existingUser.setEmail(users.getEmail());
+        existingUser.setRole(users.getRole());
+        existingUser.setEmployeestatus(users.getEmployeestatus());
+        existingUser.setHiredate(users.getHiredate());
+
+
+        return userRepository.save(existingUser);
+    }
+
+    @Override
+    public void deleteUser(Long Id) {
+
+         userRepository.deleteById(Id);
     }
 }
