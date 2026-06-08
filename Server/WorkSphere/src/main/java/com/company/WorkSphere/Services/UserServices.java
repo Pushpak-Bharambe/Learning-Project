@@ -1,6 +1,8 @@
 package com.company.WorkSphere.Services;
 
 import com.company.WorkSphere.DT0.AddEmployeeRequest;
+import com.company.WorkSphere.Exception.EmployeeCodeAlreadyExistException;
+import com.company.WorkSphere.Exception.UserNameAlreadyExistException;
 import com.company.WorkSphere.entity.Organisation;
 import com.company.WorkSphere.entity.Role;
 import com.company.WorkSphere.entity.Users;
@@ -55,7 +57,7 @@ public class UserServices implements IUserServices {
     }
 
     @Override
-    public Users saveUsers(Users users, String username) {
+    public Users saveUsers(Users users, String username) throws EmployeeCodeAlreadyExistException, UserNameAlreadyExistException {
 
       Users LoggedInUser =   userRepository.findByUsername(username);
         users.setOrganisation(LoggedInUser.getOrganisation());
@@ -84,6 +86,16 @@ public class UserServices implements IUserServices {
             users.setManager(null);
         }
 
+        if (userRepository.existsByEmployeecode(users.getEmployeecode())) {
+            throw new EmployeeCodeAlreadyExistException("Employee code is already used");
+        }
+
+
+        Users existingUser = userRepository.findByUsername(users.getUsername());
+
+        if (existingUser != null) {
+            throw new UserNameAlreadyExistException("UserName Already Exists");
+        }
         return userRepository.save(users);
     }
 

@@ -1,6 +1,8 @@
 package com.company.WorkSphere.Services;
 
 import com.company.WorkSphere.DT0.AddEmployeeRequest;
+import com.company.WorkSphere.Exception.EmployeeCodeAlreadyExistException;
+import com.company.WorkSphere.Exception.UserNameAlreadyExistException;
 import com.company.WorkSphere.entity.Organisation;
 import com.company.WorkSphere.entity.Users;
 import com.company.WorkSphere.Exception.IncorrectPasswordException;
@@ -13,7 +15,7 @@ public interface IUserServices {
 
 
     public Users AuthUser(String username, String Password) throws UserNotFoundException, IncorrectPasswordException;
-   public Users saveUsers(Users users , String username);
+   public Users saveUsers(Users users , String username) throws EmployeeCodeAlreadyExistException, UserNameAlreadyExistException;
 
   public   List<Users> fetchUserList(String username);
 

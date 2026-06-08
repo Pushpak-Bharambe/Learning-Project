@@ -3,6 +3,8 @@ package com.company.WorkSphere.controller;
 
 
 import com.company.WorkSphere.DT0.AddEmployeeRequest;
+import com.company.WorkSphere.Exception.EmployeeCodeAlreadyExistException;
+import com.company.WorkSphere.Exception.UserNameAlreadyExistException;
 import com.company.WorkSphere.JwtUtils.JwtUtil;
 import com.company.WorkSphere.Services.OrganisationServices;
 import com.company.WorkSphere.Services.UserServices;
@@ -28,9 +30,10 @@ public class UserController {
     private OrganisationServices organisationServices;
 
     @PostMapping("/users")
-    public Users saveUser( @RequestHeader("Authorization") String token, @RequestBody Users users){
+    public Users saveUser( @RequestHeader("Authorization") String token, @RequestBody Users users) throws EmployeeCodeAlreadyExistException, UserNameAlreadyExistException {
         String jwt = token.substring(7);
         String username =  jwtUtil.extractUsername(jwt);
+
 
         return userServices.saveUsers(users,username);
     }
@@ -61,7 +64,7 @@ public class UserController {
 
     @GetMapping("/me")
     public Users getLoggedInUser(Principal principal) {
-        String username = principal.getName(); // comes from Spring Security
+        String username = principal.getName();
         return userServices.getUserByUsername(username);
     }
 

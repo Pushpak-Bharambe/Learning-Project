@@ -13,7 +13,7 @@ public class OrganisationController {
     @Autowired
     private OrganisationServices organisationServices;
 
-    @PostMapping("/organisation")
+    @PostMapping("/auth/organisation")
     public Organisation saveOrganisation(@RequestBody Organisation organisation){
        return  organisationServices.saveOrganisation(organisation);
     }
@@ -21,7 +21,7 @@ public class OrganisationController {
 
     @GetMapping("/organisation/{id}")
     public Organisation fetchOrganisationById(@PathVariable("id") Long Id) {
-        System.out.println("HIT ID = " + Id);
+
         return organisationServices.fetchOrganisationById(Id);
     }
 }

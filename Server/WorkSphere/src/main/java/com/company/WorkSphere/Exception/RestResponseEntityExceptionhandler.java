@@ -35,4 +35,18 @@ public class RestResponseEntityExceptionhandler
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
     }
 
+    @ExceptionHandler(EmployeeCodeAlreadyExistException.class)
+    public ResponseEntity<ErrorMessage> EmployeeCodeAlreadyExistException(EmployeeCodeAlreadyExistException exception ,WebRequest request){
+        ErrorMessage message = new ErrorMessage(HttpStatus.UNAUTHORIZED, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+    }
+
+    @ExceptionHandler(UserNameAlreadyExistException.class)
+    public ResponseEntity<ErrorMessage> UserNameAlreadyExistException(UserNameAlreadyExistException exception ,WebRequest request){
+        ErrorMessage message = new ErrorMessage(HttpStatus.UNAUTHORIZED, exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+    }
+
 }

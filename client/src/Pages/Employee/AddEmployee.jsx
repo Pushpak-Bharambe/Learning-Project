@@ -133,6 +133,7 @@ const Button = styled.button`
 export const AddEmployee = () => {
   const [rolesdata, setRolesData] = useState([]);
   const [managersData, setManagersData] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchRoles = async () => {
@@ -177,8 +178,12 @@ export const AddEmployee = () => {
       },
     };
 
-    await API.post("/users", EmployeeData);
-    toast.success("Employee Added Successfully");
+    try {
+      const res = await API.post("/users", EmployeeData);
+      toast.success("Employee Added Successfully");
+    } catch (err) {
+      toast.error(err?.response?.data?.message);
+    }
   };
 
   return (
@@ -186,7 +191,6 @@ export const AddEmployee = () => {
       <Navbar />
 
       <Wrapper>
-        {/* LEFT PANEL */}
         <SidePanel>
           <SideImage src="/addemployee.jpg" />
           <SideTitle>Employee Onboarding</SideTitle>
@@ -196,11 +200,9 @@ export const AddEmployee = () => {
           </SideText>
         </SidePanel>
 
-        {/* FORM AREA */}
         <FormArea onSubmit={HandleOnAdd}>
           <Title>Add Employee</Title>
 
-          {/* PERSONAL */}
           <Section>
             <SectionTitle>Personal Info</SectionTitle>
 
@@ -240,7 +242,6 @@ export const AddEmployee = () => {
             </Grid>
           </Section>
 
-          {/* WORK INFO */}
           <Section>
             <SectionTitle>Work Details</SectionTitle>
 
@@ -293,7 +294,6 @@ export const AddEmployee = () => {
             </Grid>
           </Section>
 
-          {/* SYSTEM */}
           <Section>
             <SectionTitle>System Info</SectionTitle>
 
@@ -322,6 +322,7 @@ export const AddEmployee = () => {
               </Field>
             </Grid>
           </Section>
+          <h1>{error}</h1>
 
           <Button type="submit">Create Employee</Button>
         </FormArea>

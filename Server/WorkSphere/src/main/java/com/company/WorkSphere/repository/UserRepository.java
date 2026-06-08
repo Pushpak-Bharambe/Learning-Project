@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<Users,Long> {
 
-//    public Users findByusername(String username);
+
 
 
 
@@ -25,9 +25,13 @@ public interface UserRepository extends JpaRepository<Users,Long> {
 
     public Users findByUsername(String username);
 
+
+
     public List<Users> findAllByManager_id(Long manager);
 
     public Users findByemail (String email);
+
+    boolean existsByEmployeecode(String employeecode);
 
 
 }

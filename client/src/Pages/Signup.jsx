@@ -210,13 +210,12 @@ export const Signup = () => {
     };
 
     try {
-      await axios.post("/organisation", newData);
+      await axios.post("/auth/organisation", newData);
 
       alert("Organization Registered Successfully");
       navigate("/login");
     } catch (err) {
-      console.log(err);
-      alert("Something went wrong");
+      alert(err.response?.data?.message || err.message);
     }
   };
 

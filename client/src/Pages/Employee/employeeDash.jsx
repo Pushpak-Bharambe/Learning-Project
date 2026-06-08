@@ -15,6 +15,7 @@ import {
   CalendarCheck,
   TrendingUp,
   Shield,
+  ClipboardClock,
 } from "lucide-react";
 import API from "../../CommonComponent/TokenRequest";
 
@@ -296,6 +297,14 @@ export const EmployeeDashboard = () => {
 
             <CardWrap>
               <Card icon={<TrendingUp size={24} />} title="Performance" />
+            </CardWrap>
+
+            <CardWrap>
+              <Card
+                icon={<ClipboardClock size={24} />}
+                title="TimeSheet"
+                onClick={() => navigate("/TimeSheet")}
+              />
             </CardWrap>
           </Grid>
         </div>

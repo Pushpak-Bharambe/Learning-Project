@@ -268,14 +268,17 @@ export const Open = ({
   setEditEmployee,
   setSelectEmployee,
   emp,
+  onOpen,
 }) => {
   const { open } = useContext(ModalContext);
   return cloneElement(children, {
     onClick: () => {
       open(opens);
-      setSelectEmployee(emp);
-      setEditEmployee(emp);
-      setCanEdit(false);
+
+      if (setSelectEmployee) setSelectEmployee(emp);
+      if (setEditEmployee) setEditEmployee(emp);
+      if (setCanEdit) setCanEdit(false);
+      onOpen?.();
     },
   });
 };
@@ -288,7 +291,10 @@ export const Close = ({ children }) => {
   const { close } = useContext(ModalContext);
 
   return cloneElement(children, {
-    onClick: close,
+    onClick: (e) => {
+      children.props.onClick?.(e);
+      close();
+    },
   });
 };
 

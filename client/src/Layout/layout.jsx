@@ -12,6 +12,7 @@ import { AddEmployee } from "../Pages/Employee/AddEmployee";
 import { ManageEmployee } from "../Pages/Employee/ManageEmployee";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ManagerEmployees } from "../Pages/Employee/ManagerEmployees";
+import { Timesheet } from "../Pages/Employee/TimeSheet";
 
 export const Layout = () => {
   return (
@@ -57,6 +58,7 @@ export const Layout = () => {
               }
             />
 
+            <Route path="TimeSheet" element={<Timesheet />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
